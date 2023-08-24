@@ -6,7 +6,7 @@
  * @argc: Number of command-line arguments.
  * @argv: Array of command-line argument strings.
  *
- * Return: EXIT_SUCCESS or EXIT_FAILURE.
+ * Return: 0 or 1.
  */
 int main(int argc, char *argv[])
 {
@@ -16,16 +16,16 @@ int main(int argc, char *argv[])
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
-		return (EXIT_FAILURE);
+		return (1);
 	}
 
 	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		return (EXIT_FAILURE);
+		return (1);
 	}
 
-	int result = process_file(file);
+	result = _process_file(file);
 
 	fclose(file);
 	return (result);

@@ -1,35 +1,36 @@
 #include "monty.h"
+#include <stdlib.h>
 
 /**
- * push - Pushes an element to the stack.
+ * _push - Pushes an element to the stack.
  *
  * @st: Pointer to the stack.
  * @ln: Line number in the file.
- * @value_str: Value as a string to push onto the stack.
+ * @val: Value as a string to push onto the stack.
  */
-void push(stack_t **st, unsigned int ln, char *value_str)
+void _push(stack_t **st, unsigned int ln, char *val)
 {
 	int value;
 	stack_t *new_node = malloc(sizeof(stack_t));
 
-	if (value_str == NULL)
+	if (val == NULL)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", ln);
-		exit(EXIT_FAILURE);
+		exit(1);
 	}
 
-	value = atoi(value_str);
-	if (value == 0 && value_str[0] != '0')
+	value = _atoi(val);
+	if (value == 0 && val[0] != '0')
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", ln);
-		exit(EXIT_FAILURE);
+		exit(1);
 	}
 
 	new_node = malloc(sizeof(stack_t));
 	if (new_node == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
+		exit(1);
 	}
 
 	new_node->n = value;
@@ -43,19 +44,19 @@ void push(stack_t **st, unsigned int ln, char *value_str)
 }
 
 /**
- * pop - Removes the top element of the stack.
+ * _pop - Removes the top element of the stack.
  *
  * @st: Pointer to the stack.
  * @ln: Line number in the file.
  */
-void pop(stack_t **st, unsigned int ln)
+void _pop(stack_t **st, unsigned int ln)
 {
 	stack_t *temp = *st;
 
 	if (*st == NULL)
 	{
 		fprintf(stderr, "L%u: can't pop an empty stack\n", ln);
-		exit(EXIT_FAILURE);
+		exit(1);
 	}
 
 	temp = *st;
@@ -68,12 +69,12 @@ void pop(stack_t **st, unsigned int ln)
 }
 
 /**
- * pall - Prints all the values on the stack.
+ * _pall - Prints all the values on the stack.
  *
  * @st: Pointer to the stack.
  * @ln: Line number in the file.
  */
-void pall(stack_t **st, unsigned int ln)
+void _pall(stack_t **st, unsigned int ln)
 {
 	stack_t *current = *st;
 	(void) ln;
@@ -86,17 +87,17 @@ void pall(stack_t **st, unsigned int ln)
 }
 
 /**
- * pint - Prints the value at the top of the stack.
+ * _pint - Prints the value at the top of the stack.
  *
  * @st: Pointer to the stack.
  * @ln: Line number in the file.
  */
-void pint(stack_t **st, unsigned int ln)
+void _pint(stack_t **st, unsigned int ln)
 {
 	if (*st == NULL)
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty\n", ln);
-		exit(EXIT_FAILURE);
+		exit(1);
 	}
 
 	printf("%d\n", (*st)->n);

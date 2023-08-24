@@ -1,19 +1,20 @@
 #include "monty.h"
+#include <stdlib.h>
 
 /**
- * pchar - Prints the character at the top of the stack.
+ * _pchar - Prints the character at the top of the stack.
  *
  * @st: Pointer to the stack.
  * @ln: Line number in the file.
  */
-void pchar(stack_t **st, unsigned int ln)
+void _pchar(stack_t **st, unsigned int ln)
 {
 	int value;
 
 	if (*st == NULL)
 	{
 		fprintf(stderr, "L%u: can't pchar, stack empty\n", ln);
-		exit(EXIT_FAILURE);
+		exit(1);
 	}
 
 	value = (*st)->n;
@@ -21,7 +22,7 @@ void pchar(stack_t **st, unsigned int ln)
 	if (value < 0 || value > 127)
 	{
 		fprintf(stderr, "L%u: can't pchar, value out of range\n", ln);
-		exit(EXIT_FAILURE);
+		exit(1);
 	}
 
 	putchar(value);
@@ -29,15 +30,17 @@ void pchar(stack_t **st, unsigned int ln)
 }
 
 /**
- * pstr - Prints the string starting from the top of the stack.
+ * _pstr - Prints the string starting from the top of the stack.
  *
  * @st: Pointer to the stack.
  * @ln: Line number in the file.
  */
-void pstr(stack_t **st, unsigned int ln)
+void _pstr(stack_t **st, unsigned int ln)
 {
+	stack_t *current;
 	(void)ln; /* Unused variable */
-	stack_t *current = *st;
+
+	current = *st;
 
 	while (current != NULL && current->n != 0
 			&& (current->n >= 0 && current->n <= 127))
@@ -50,15 +53,15 @@ void pstr(stack_t **st, unsigned int ln)
 }
 
 /**
- * rotl - Rotates the stack to the top.
+ * _rotl - Rotates the stack to the top.
  *
  * @st: Pointer to the stack.
  * @ln: Line number in the file.
  */
-void rotl(stack_t **st, unsigned int ln)
+void _rotl(stack_t **st, unsigned int ln)
 {
-	(void)ln; /* Unused variable */
 	stack_t *last;
+	(void)ln; /* Unused variable */
 
 	if (*st == NULL || (*st)->next == NULL)
 		return;
@@ -77,15 +80,15 @@ void rotl(stack_t **st, unsigned int ln)
 }
 
 /**
- * rotr - Rotates the stack to the bottom.
+ * _rotr - Rotates the stack to the bottom.
  *
  * @st: Pointer to the stack.
  * @ln: Line number in the file.
  */
-void rotr(stack_t **st, unsigned int ln)
+void _rotr(stack_t **st, unsigned int ln)
 {
-	(void)ln; /* Unused variable */
 	stack_t *last;
+	(void)ln; /* Unused variable */
 
 	if (*st == NULL || (*st)->next == NULL)
 		return;
@@ -101,4 +104,3 @@ void rotr(stack_t **st, unsigned int ln)
 	last->prev->next = NULL;
 	last->prev = NULL;
 }
-
