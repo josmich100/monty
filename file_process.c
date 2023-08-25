@@ -17,7 +17,6 @@ int _process_file(FILE *file)
 	char *line = NULL;
 	char *val;
 	size_t len = 0;
-	ssize_t read;
 	unsigned int ln = 0;
 	char *opcode = NULL;
 	void (*op_func)(stack_t **, unsigned int) = NULL;
