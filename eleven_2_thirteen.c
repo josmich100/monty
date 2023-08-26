@@ -14,7 +14,7 @@ void _pchar(stack_t **st, unsigned int ln)
 	if (*st == NULL)
 	{
 		fprintf(stderr, "L%u: can't pchar, stack empty\n", ln);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 
 	value = (*st)->n;
@@ -22,7 +22,7 @@ void _pchar(stack_t **st, unsigned int ln)
 	if (value < 0 || value > 127)
 	{
 		fprintf(stderr, "L%u: can't pchar, value out of range\n", ln);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 
 	putchar(value);

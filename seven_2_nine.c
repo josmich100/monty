@@ -14,7 +14,7 @@ int _div_op(int a, int b, unsigned int ln)
 	if (b == 0)
 	{
 		fprintf(stderr, "L%u: division by zero\n", ln);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 
 	return (a / b);
@@ -33,7 +33,7 @@ void _div(stack_t **st, unsigned int ln)
 	if (*st == NULL || (*st)->next == NULL)
 	{
 		fprintf(stderr, "L%u: can't div, stack too short\n", ln);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 
 	b = (*st)->n;
@@ -54,7 +54,7 @@ void _mul(stack_t **st, unsigned int ln)
 	if (*st == NULL || (*st)->next == NULL)
 	{
 		fprintf(stderr, "L%u: can't mul, stack too short\n", ln);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 
 	(*st)->next->n *= (*st)->n;
@@ -74,7 +74,7 @@ void _mod(stack_t **st, unsigned int ln)
 	if (*st == NULL || (*st)->next == NULL)
 	{
 		fprintf(stderr, "L%u: can't mod, stack too short\n", ln);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 
 	b = (*st)->n;
@@ -84,9 +84,8 @@ void _mod(stack_t **st, unsigned int ln)
 	if (b == 0)
 	{
 		fprintf(stderr, "L%u: division by zero\n", ln);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 
 	(*st)->n = a % b;
 }
-

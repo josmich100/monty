@@ -14,7 +14,7 @@ void _stack(stack_t **st, unsigned int ln)
 }
 
 /**
- * queue - Sets the format of the data to a queue (FIFO).
+ * _queue - Sets the format of the data to a queue (FIFO).
  *
  * @st: Pointer to the stack.
  * @ln: Line number in the file.

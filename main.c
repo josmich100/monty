@@ -1,4 +1,5 @@
 #include "monty.h"
+#include <stdlib.h>
 
 /**
  * main - Entry point of the Monty program.
@@ -10,23 +11,24 @@
  */
 int main(int argc, char *argv[])
 {
-	int result;
-	FILE *file = fopen(argv[1], "r");
+	FILE *file;
+	stack_t *st = NULL;
 
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
-		return (1);
+		exit(EXIT_FAILURE);
 	}
 
+	file = fopen(argv[1], "r");
 	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		return (1);
+		exit(EXIT_FAILURE);
 	}
 
-	result = _process_file(file);
-
+	process_opcodes(file, &st);
 	fclose(file);
-	return (result);
+
+	exit(EXIT_SUCCESS);
 }

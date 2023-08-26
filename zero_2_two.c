@@ -11,36 +11,43 @@
 void _push(stack_t **st, unsigned int ln, char *val)
 {
 	int value;
-	stack_t *new_node = malloc(sizeof(stack_t));
+	stack_t *new_node;
 
-	if (val == NULL)
+	if (val == NULL || !is_integer(val))
 	{
-		fprintf(stderr, "L%u: usage: push integer\n", ln);
-		exit(1);
+		fprintf(stderr, "L%d: usage: push integer\n", ln);
+		exit(EXIT_FAILURE);
 	}
 
 	value = _atoi(val);
 	if (value == 0 && val[0] != '0')
 	{
-		fprintf(stderr, "L%u: usage: push integer\n", ln);
-		exit(1);
+		fprintf(stderr, "L%d: usage: push integer\n", ln);
+		exit(EXIT_FAILURE);
 	}
 
 	new_node = malloc(sizeof(stack_t));
+
 	if (new_node == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 
 	new_node->n = value;
-	new_node->prev = NULL;
-	new_node->next = *st;
 
-	if (*st)
+	if (*st == NULL)
+	{
+		*st = new_node;
+		new_node->next = NULL;
+		new_node->prev = NULL;
+	}
+	else
+	{
+		new_node->next = *st;
 		(*st)->prev = new_node;
-
-	*st = new_node;
+		*st = new_node;
+	}
 }
 
 /**
@@ -56,7 +63,7 @@ void _pop(stack_t **st, unsigned int ln)
 	if (*st == NULL)
 	{
 		fprintf(stderr, "L%u: can't pop an empty stack\n", ln);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 
 	temp = *st;
@@ -97,8 +104,30 @@ void _pint(stack_t **st, unsigned int ln)
 	if (*st == NULL)
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty\n", ln);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 
 	printf("%d\n", (*st)->n);
+}
+
+/**
+ * is_integer - checks whether it is an integer
+ *
+ * @str: input to check for an integer
+ *
+ * Return: 0 if true and 1 if false
+ */
+int is_integer(const char *str)
+{
+	if (str == NULL || *str == '\0')
+		return (0);
+
+	while (*str)
+	{
+		if (!isdigit(*str) && *str != '-' && *str != '+')
+			return (0);
+		str++;
+	}
+
+	return (1);
 }

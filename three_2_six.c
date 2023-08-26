@@ -14,7 +14,7 @@ void _swap(stack_t **st, unsigned int ln)
 	if (*st == NULL || (*st)->next == NULL)
 	{
 		fprintf(stderr, "L%u: can't swap, stack too short\n", ln);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 
 	tmp = (*st)->n;
@@ -33,7 +33,7 @@ void _add(stack_t **st, unsigned int ln)
 	if (*st == NULL || (*st)->next == NULL)
 	{
 		fprintf(stderr, "L%u: can't add, stack too short\n", ln);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 
 	(*st)->next->n += (*st)->n;
@@ -64,7 +64,7 @@ void _sub(stack_t **st, unsigned int ln)
 	if (*st == NULL || (*st)->next == NULL)
 	{
 		fprintf(stderr, "L%u: can't sub, stack too short\n", ln);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 
 	(*st)->next->n -= (*st)->n;

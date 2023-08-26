@@ -60,8 +60,9 @@ void _div(stack_t **st, unsigned int ln);
 void _mod(stack_t **st, unsigned int ln);
 
 /* file handling */
-int _process_file(FILE *file);
+void process_opcodes(FILE *file, stack_t **stack);
 void free_stack(stack_t **stack);
 int _atoi(char *s);
+int is_integer(const char *str);
 
 #endif /* MONTY_H */
