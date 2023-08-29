@@ -30,5 +30,5 @@ int main(int argc, char *argv[])
 	process_opcodes(file, &st);
 	fclose(file);
 
-	exit(EXIT_SUCCESS);
+	return(0);
 }
