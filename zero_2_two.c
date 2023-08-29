@@ -20,12 +20,6 @@ void _push(stack_t **st, unsigned int ln, char *val)
 	}
 
 	value = _atoi(val);
-	if (value == 0 && val[0] != '0')
-	{
-		fprintf(stderr, "L%d: usage: push integer\n", ln);
-		exit(EXIT_FAILURE);
-	}
-
 	new_node = malloc(sizeof(stack_t));
 
 	if (new_node == NULL)
@@ -122,10 +116,14 @@ int is_integer(const char *str)
 	if (str == NULL || *str == '\0')
 		return (0);
 
+	/* Skip leading signs before checking digits */
+	if (*str == '-' || *str == '+')
+		str++;
+
 	while (*str)
 	{
-		if (!isdigit(*str) && *str != '-' && *str != '+')
-			return (0);
+		if (!isdigit(*str))
+			return 0;
 		str++;
 	}
 
